@@ -89,6 +89,8 @@ export default props =>{
                      props.selection >= 0?
                      <>
                         <Use href="#selection" fill={fillColor} mask="url(#selectionMask)" />
+                        <Use href="#selection" fill={fillColor} mask="url(#selectionMask)" />
+                        <Use href="#selection" fill={fillColor} mask="url(#selectionMask)" />
                      </>
                      :null
                 }

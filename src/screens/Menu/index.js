@@ -23,7 +23,7 @@ function CustomDrawerContent({ progress, ...rest }) {
     });
   
     return (
-      <DrawerContentScrollView {...rest} style={s.box}>
+      <DrawerContentScrollView {...rest} style={s.box} >
         <View style={s.container}>
             <View style={s.userPhotoCircle}>
                 <View style={s.userPhotoContainer}>
@@ -60,7 +60,7 @@ function MyDrawer() {
 
 export default function App() {
     return (
-      <NavigationContainer>
+      <NavigationContainer independent={true}>
         <MyDrawer />
       </NavigationContainer>
     );

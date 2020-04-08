@@ -12,7 +12,7 @@ export default props => {
             <Text style={s.title}>Ei Nark!</Text>
             <Text style={s.subTitle}>O Esforço de hoje decidira quem você será amanhã. Dê o seu melhor!</Text>
 
-            <Card image={image} onDetailClick={() => onDetailClick()} />
+            <Card image={image} onPress={()=> props.navigation.navigate("Atividade")} />
         </View>
     )
 }

@@ -9,5 +9,8 @@ export default StyleSheet.create({
     },
     textPrimaryColor:{
         color: 'white'
+    },
+    bacgroundPrimaryColor:{
+        color: "#24272b"
     }
 })

@@ -2,7 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import s from './styles'
 import GradientRect from './GradientRect'
-import WeekDays from '../Comonents/WeekDays'
+import WeekDays from '../Components/WeekDays'
 import Config from '../../../Config'
 
 export default props => {

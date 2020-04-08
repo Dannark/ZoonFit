@@ -1,20 +1,36 @@
-import React, {Component} from 'react'
-import {Text, View, StyleSheet, ScrollView, YellowBox} from 'react-native'
-import Buttons, {HorizontalButton, HorizontalButton2, ConfigButton} from '../../components/Buttons'
-import GreetingSection from '../../components/Sections/ActivitySection'
+import React, { Component } from 'react'
+import {Text, View, ScrollView } from 'react-native'
+import {HorizontalButton2, ConfigButton} from '../../components/Buttons'
+import CondictionalSection from '../../components/Sections/CondictionalSection'
 import DaysSection from '../../components/Sections/DaysSection'
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
+import { createStackNavigator, CardStyleInterpolators, TransitionSpecs } from '@react-navigation/stack';
+import { loadLaunchScreen } from './functions'
+
 import Activity from '../Activity'
 import Status from '../Status'
+import LaunchApp from '../../../LaunchApp'
 
 import s from './styles'
 
 class Home extends Component{
   
+  constructor(props) {
+    super(props);
+
+    this.state = { renderScreen:false }
+    loadLaunchScreen(props, this.callback)
+    
+  }
+
+  callback = () =>{
+    this.setState({renderScreen:true})
+  }
+
   render(){
     return(
       <View style={s.page}>
+        {this.state.renderScreen ? 
         <View style={{flex:1}}>
         <ScrollView>
           <View style={s.header}>
@@ -26,7 +42,7 @@ class Home extends Component{
           </View>
 
           <DaysSection />
-          <GreetingSection></GreetingSection>
+          <CondictionalSection navigation={this.props.navigation} />
           
           <Text style={s.texttag}>CONHECIMENTO</Text>
           <HorizontalButton2 featherIcon={"droplet"} text={"Copos de água"} subtext={"1 min atrás"} />
@@ -38,6 +54,7 @@ class Home extends Component{
           
         </ScrollView>
         </View>
+        : null}
       </View>
     )
   }
@@ -53,14 +70,20 @@ function App() {
     <View style={{ flex: 1 }}>
       <NavigationContainer ref={ref} independent={true}>
         <Stack.Navigator 
-            initialRouteName="Home" 
+            initialRouteName="Home"
             screenOptions={{
               headerShown: false,
+              transitionSpec: {
+                open: 0,//TransitionSpecs.TransitionIOSSpec
+                close: 0,//TransitionSpecs.TransitionIOSSpec
+              },
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
               }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Atividade" component={Activity} />
           <Stack.Screen name="Status" component={Status} />
+          <Stack.Screen name="LaunchApp" component={LaunchApp}
+            options={{cardStyleInterpolator: CardStyleInterpolators.forNoAnimation}} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
