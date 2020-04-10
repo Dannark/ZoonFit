@@ -1,6 +1,5 @@
 import React from 'react'
 import {Text, View, StyleSheet, TouchableHighlight} from 'react-native'
-import {notificar} from '../../Menssagem'
 import s from './styles'
 
 export default props =>{
@@ -36,5 +35,5 @@ export default props =>{
 }
 
 function passos(msg){
-    notificar(msg)
+    
 }

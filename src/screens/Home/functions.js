@@ -1,9 +1,8 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
 export function loadLaunchScreen(props, callback){
-    storeData("firstlaunch","")
+    //storeData("firstlaunch","") //reset first screen
     AsyncStorage.getItem("firstlaunch").then((value) => {
-        console.log("isFirstLaunch="+value)
         
         if(value !== 'false'){
             storeData("firstlaunch", 'false')

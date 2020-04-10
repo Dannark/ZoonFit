@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native'
+import Config from '../../Config'
 
 export default StyleSheet.create({
     page:{
       height: '100%',
-      backgroundColor: '#24272b',
+      backgroundColor: Config.bacgroundPrimaryColor.color,
   
     },
     header:{
@@ -20,5 +21,35 @@ export default StyleSheet.create({
     sub_title:{
       color: '#606265',
       marginHorizontal: 10
-    }
+    },
+
+    statusContainer:{
+      width: '100%',
+      flexDirection: 'row',
+      marginLeft: 10,
+      marginVertical: 7,
+      alignItems: 'center',
+    },
+    statusNameContainer:{
+      width: 60,
+      alignItems: 'center'
+    },
+    textStatusName:{
+      color:'white',
+      fontSize: 14
+    },
+    statusDisplay:{
+      width: '70%',
+      marginLeft: 15,
+      paddingLeft: 30,
+      height:60,
+      justifyContent: 'center',
+    },
+    textStatusPercentage:{
+      color:'white',
+      fontWeight:'bold',
+      fontSize: 20
+    },
+
+
   })

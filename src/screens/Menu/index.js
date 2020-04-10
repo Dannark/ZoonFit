@@ -34,7 +34,7 @@ function CustomDrawerContent({ progress, ...rest }) {
         <Animated.View style={{ transform: [{ translateX }] }}>
           <DrawerItemList {...rest}
             activeTintColor={Config.primaryColor.color}
-            activeBackgroundColor='rgba(0, 0, 0, .08)' 
+            activeBackgroundColor='rgba(0, 0, 0, .17)' 
             inactiveTintColor='rgba(0, 0, 0, .87)' 
             inactiveBackgroundColor='transparent' 
             style={{backgroundColor: '#000000'}} 

@@ -12,5 +12,5 @@ export default StyleSheet.create({
     },
     bacgroundPrimaryColor:{
         color: "#24272b"
-    }
+    },
 })

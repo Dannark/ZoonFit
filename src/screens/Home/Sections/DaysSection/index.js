@@ -1,6 +1,6 @@
 import React from 'react'
 import {View, ScrollView} from 'react-native'
-import Buttons from '../../Buttons'
+import Buttons from '../../../../components/Buttons'
 import s from './styles'
 
 export default porps =>{

@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
-import {Text, View, ScrollView } from 'react-native'
-import {HorizontalButton2, ConfigButton} from '../../components/Buttons'
-import CondictionalSection from '../../components/Sections/CondictionalSection'
-import DaysSection from '../../components/Sections/DaysSection'
+import {View, ScrollView } from 'react-native'
+import CondictionalSection from './Sections/CondictionalSection'
+import DaysSection from './Sections/DaysSection'
+import HeaderSection from './Sections/HeaderSection'
+import KnowledgeSection from './Sections/KnowledgeSection'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators, TransitionSpecs } from '@react-navigation/stack';
 import { loadLaunchScreen } from './functions'
 
 import Activity from '../Activity'
-import Status from '../Status'
+import Calories from '../Calories'
+import Conditional from '../Conditional'
 import LaunchApp from '../../../LaunchApp'
 
 import s from './styles'
@@ -33,25 +35,10 @@ class Home extends Component{
         {this.state.renderScreen ? 
         <View style={{flex:1}}>
         <ScrollView>
-          <View style={s.header}>
-            <View>
-              <Text style={s.small_title}>Your Activity</Text>
-              <Text style={s.sub_title}>You are very Active!</Text>
-            </View>
-            <ConfigButton></ConfigButton>
-          </View>
-
+          <HeaderSection />
           <DaysSection />
           <CondictionalSection navigation={this.props.navigation} />
-          
-          <Text style={s.texttag}>CONHECIMENTO</Text>
-          <HorizontalButton2 featherIcon={"droplet"} text={"Copos de água"} subtext={"1 min atrás"} />
-          <HorizontalButton2 ionicon={"md-pizza"} text={"Calorias"} subtext={"25 min atrás"} 
-            onPress={() => this.props.navigation.navigate("Status")}/>
-          <HorizontalButton2 featherIcon={"activity"} text={"Atividades"} subtext={"2 min atrás"} 
-            onPress={() => this.props.navigation.navigate("Atividade")}/>
-          
-          
+          <KnowledgeSection navigation={this.props.navigation} />
         </ScrollView>
         </View>
         : null}
@@ -81,7 +68,8 @@ function App() {
               }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Atividade" component={Activity} />
-          <Stack.Screen name="Status" component={Status} />
+          <Stack.Screen name="Calorias" component={Calories} />
+          <Stack.Screen name="Conditional" component={Conditional} />
           <Stack.Screen name="LaunchApp" component={LaunchApp}
             options={{cardStyleInterpolator: CardStyleInterpolators.forNoAnimation}} />
         </Stack.Navigator>

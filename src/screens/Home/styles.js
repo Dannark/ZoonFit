@@ -12,28 +12,5 @@ export default StyleSheet.create({
     color: 'white',
     margin: 10
   },
-  header:{
-    marginHorizontal:10,
-    marginVertical:25,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  small_title:{
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: 'white',
-    marginHorizontal: 10
-  },
-  sub_title:{
-    color: '#606265',
-    marginHorizontal: 10
-  },
-
-  texttag:{
-    color:'#474747',
-    marginLeft:20,
-    marginBottom:5,
-    fontWeight:'bold',
-    fontSize:15
-  }
+  
 })

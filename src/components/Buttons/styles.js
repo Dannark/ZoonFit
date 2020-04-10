@@ -56,15 +56,6 @@ export default StyleSheet.create({
         borderWidth: 1,
       },
 
-      item_horizontalButton:{
-        backgroundColor: `rgba(61, 64, 69, 0.9)`,
-        borderRadius:15,
-        padding: 13,
-        marginHorizontal:15,
-        marginVertical: 5,
-        justifyContent:'center'
-      },
-
       item_horizontalButton2:{
         borderRadius:15,
         padding: 2,

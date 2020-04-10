@@ -1,9 +1,11 @@
 import React from 'react'
 import {Text, View, StyleSheet, TouchableHighlight, Button, ScrollView} from 'react-native'
-import {BackButton, HorizontalButton} from '../../components/Buttons'
-import CounterSection from '../../components/Sections/CounterSection'
+import {BackButton} from '../../components/Buttons'
+import CounterSection from '../Home/Sections/CounterSection'
 import GradientChart from '../../components/Charts/GradientChart'
+import GradientRect from '../../components/Buttons/Components/GradientRect'
 import s from './styles'
+import Config from '../../Config'
 
 export default props =>{
   const chartHeight = 150
@@ -25,9 +27,36 @@ export default props =>{
 
         <GradientChart height={chartHeight} data={data} data2={data2} selectedDay={selectedDay} />
         <CounterSection />
-        
-        <HorizontalButton id={1} text={"Botao1"} subtext={"08:00"} />
-        <HorizontalButton id={2} text={"Botao2"} subtext={"09:00"} />
+
+        <View style={s.statusContainer}>
+          <View style={s.statusNameContainer}>
+            <Text style={s.textStatusName}>Sáude</Text>
+          </View>
+          <View style={s.statusDisplay}>
+            <GradientRect alpha1="1" alpha2="0" />
+            <Text style={s.textStatusPercentage}>71%</Text>
+          </View>
+        </View>
+
+        <View style={s.statusContainer}>
+          <View style={s.statusNameContainer}>
+            <Text style={s.textStatusName}>Calorias</Text>
+          </View>
+          <View style={s.statusDisplay}>
+            <GradientRect alpha1="1" alpha2="0" color1={Config.secondaryColor.color} />
+            <Text style={s.textStatusPercentage}>9.733</Text>
+          </View>
+        </View>
+
+        <View style={s.statusContainer}>
+          <View style={s.statusNameContainer}>
+            <Text style={s.textStatusName}>Peso</Text>
+          </View>
+          <View style={s.statusDisplay}>
+            <GradientRect alpha1="1" alpha2="0" color1={Config.secondaryColor.color} />
+            <Text style={s.textStatusPercentage}>0.6k</Text>
+          </View>
+        </View>
       </ScrollView>
     </View>
   )

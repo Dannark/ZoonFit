@@ -5,6 +5,7 @@ import s from './styles'
 import Config from '../../Config'
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 function getDayButton(props){
   if(props.buttonType=="past"){
@@ -34,7 +35,8 @@ function getDayButton(props){
             <Text style={s.dia}> {props.dia} </Text>
             <Text style={s.mes}> {props.mes} </Text>
         </View>
-      </TouchableHighlight>)
+      </TouchableHighlight>
+      )
   }
 }
 
@@ -70,26 +72,6 @@ export const ConfigButton = props => {
   )
 }
 
-export const HorizontalButton = props => {
-  acao = () => {
-    notificar("Action")
-  }
-  return(
-    <TouchableHighlight style={s.item_horizontalButton} underlayColor='rgba(241,96,43,0.9)' onPress={acao}>
-        <View style={{flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
-          <View style={{flexDirection: 'row', alignItems:'center'}}>
-            <View style={{borderRadius:50, backgroundColor:'rgba(30,32,36,1)', width: 30, height: 30, alignItems:'center', justifyContent:'center'}}>
-              {/*<Image source={require('../img/menu.png')} style={{width: 20, height: 20}} />*/}
-              <Text style={{color:'#808080', fontWeight:'bold'}}>{props.id}</Text>
-            </View>
-            <Text style={{color:'white', fontWeight: 'bold', marginLeft:10, fontSize: 14}}>{props.text}</Text>
-          </View>
-          <Text style={{color:'#808080'}}>{props.subtext}</Text>
-        </View>
-    </TouchableHighlight>
-  )
-}
-
 export const HorizontalButton2 = props => {
   
   return(
@@ -102,6 +84,9 @@ export const HorizontalButton2 = props => {
                 : null}
               {props.ionicon?
                 <Ionicons name={props.ionicon} size={25} color={Config.primaryColor.color}  />
+                : null}
+              {props.materialcommunityicon?
+                <MaterialCommunityIcons name={props.materialcommunityicon} size={25} color={Config.primaryColor.color}  />
                 : null}
                
             </View>
