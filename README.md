@@ -8,6 +8,6 @@ About
 ZoonFit is a personal project developed with React Native that gives the user a healthy and natural diet program, connected to a lot of bodyweight exercises. 
 The goal is to get the practitioner in shape within a few weeks or months by changing their daily habits.
 
-![ZoonFit_Demo](https://user-images.githubusercontent.com/7622553/78838249-2b010d80-79cc-11ea-81b6-317f3432418d.gif)
+![ZoonFit_Demo_v3](https://user-images.githubusercontent.com/7622553/79169683-7566fd80-7dc3-11ea-900c-40f112dd314d.gif)
 
 The Design of this project was inspired by the insane Zinat Farahani winner.
