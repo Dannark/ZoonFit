@@ -3,9 +3,6 @@ import {Text, View, StyleSheet, ImageBackground, AsyncStorage} from 'react-nativ
 import ButtonGradient from './src/components/Buttons/ButtonGradient'
 import Config from './src/Config'
 import * as Animatable from 'react-native-animatable';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
-import Menu from './src/screens/Menu'
 
 const back = require("./src/img/LauncherApp2.png")
 const icon = require("./src/img/icon.png")
@@ -47,8 +44,8 @@ export default class LaunchApp extends React.Component{
 }
 
 function goToAppHomeScreen(props){
-  //AsyncStorage.setItem("launchFirstTime", "false")
-  props.navigation.navigate("Home")
+  //props.navigation.navigate("Home")
+  props.navigation.navigate("AgeCollector")
 }
 
 

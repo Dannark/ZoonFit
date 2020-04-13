@@ -72,6 +72,17 @@ export const ConfigButton = props => {
   )
 }
 
+export const MenuButton = props => {
+  acao = () => {
+    props.navigation.openDrawer()
+  }
+  return(
+    <TouchableHighlight style={s.item_backButton} onPress={acao}>
+        <Feather name="menu" size={20} color="white"  />
+    </TouchableHighlight>
+  )
+}
+
 export const HorizontalButton2 = props => {
   
   return(

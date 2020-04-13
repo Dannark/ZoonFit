@@ -43,7 +43,8 @@ export default props =>{
             <Text style={s.textStatusName}>Calorias</Text>
           </View>
           <View style={s.statusDisplay}>
-            <GradientRect alpha1="1" alpha2="0" color1={Config.secondaryColor.color} />
+            <GradientRect alpha1="1" alpha2="0" color1={Config.secondaryColor.color} 
+              color2={Config.secondaryColor.color} />
             <Text style={s.textStatusPercentage}>9.733</Text>
           </View>
         </View>
@@ -53,7 +54,8 @@ export default props =>{
             <Text style={s.textStatusName}>Peso</Text>
           </View>
           <View style={s.statusDisplay}>
-            <GradientRect alpha1="1" alpha2="0" color1={Config.secondaryColor.color} />
+            <GradientRect alpha1="1" alpha2="0" color1={Config.secondaryColor.color}
+              color2={Config.secondaryColor.color} />
             <Text style={s.textStatusPercentage}>0.6k</Text>
           </View>
         </View>

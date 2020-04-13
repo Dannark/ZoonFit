@@ -1,5 +1,4 @@
 import React from 'react'
-import { SafeAreaView, ScrollView, Text, View, ImageBackground } from 'react-native'
 import {
     createDrawerNavigator,
     DrawerContentScrollView,
@@ -8,13 +7,18 @@ import {
   } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import Animated from 'react-native-reanimated';
-import Home from '../Home'
 import s from './styles'
+import Profile from './Sections/Profile'
 import Config from '../../Config'
 
-import Feather from 'react-native-vector-icons/Feather';
+import Home from '../Home'
+import Feed from '../Feed'
+import User from '../User'
+import Settings from '../Settings'
 
-import photo from '../../img/no-avatar.jpg'
+import Octicons from 'react-native-vector-icons/Octicons';
+import Feather from 'react-native-vector-icons/Feather';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function CustomDrawerContent({ progress, ...rest }) {
     const translateX = Animated.interpolate(progress, {
@@ -24,22 +28,19 @@ function CustomDrawerContent({ progress, ...rest }) {
   
     return (
       <DrawerContentScrollView {...rest} style={s.box} >
-        <View style={s.container}>
-            <View style={s.userPhotoCircle}>
-                <View style={s.userPhotoContainer}>
-                    <ImageBackground source={photo} style={s.userPhoto} imageStyle={{borderRadius: 50}} />
-                </View>
-            </View>
-        </View>
+        
+        <Profile />
+
         <Animated.View style={{ transform: [{ translateX }] }}>
           <DrawerItemList {...rest}
-            activeTintColor={Config.primaryColor.color}
-            activeBackgroundColor='rgba(0, 0, 0, .17)' 
-            inactiveTintColor='rgba(0, 0, 0, .87)' 
+            activeTintColor= 'white'
+            activeBackgroundColor= 'rgba(0, 0, 0, .17)' //{Config.primaryColor.color}
+            inactiveTintColor='rgba(255,255,255,0.4)' 
             inactiveBackgroundColor='transparent' 
-            style={{backgroundColor: '#000000'}} 
-            labelStyle={{color: '#ffffff'}} />
-          <DrawerItem label="Help" onPress={() => alert('Link to help')} />
+            style={{backgroundColor: '#000000', color: 'blue'}} 
+            />
+
+          {/* <DrawerItem label="Help" onPress={() => alert('Link to help')} /> */}
         </Animated.View>
       </DrawerContentScrollView>
     );
@@ -50,10 +51,30 @@ const Drawer = createDrawerNavigator();
 function MyDrawer() {
   return (
     <Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Home" component={Home} options={{
+      <Drawer.Screen name="Home" component={Home} 
+        options={{
             drawerIcon: config => 
-            <Feather name="home" size={24} color='white'  />
+            <Octicons name="home" size={24} color={config.color}  />
         }} />
+        
+        <Drawer.Screen name="Feed" component={Feed} 
+          options={{
+            drawerIcon: config => 
+            <MaterialCommunityIcons name="newspaper" size={24} color={config.color}  />
+        }} />
+        
+        <Drawer.Screen name="Usuário" component={User} 
+          options={{
+            drawerIcon: config => 
+            <Feather name="user" size={24} color={config.color}  />
+        }} />
+        
+        <Drawer.Screen name="Configurações" component={Settings} 
+          options={{
+            drawerIcon: config => 
+            <Octicons name="settings" size={24} color={config.color}  />
+        }} />
+        
     </Drawer.Navigator>
   );
 }

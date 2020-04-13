@@ -5,7 +5,6 @@ export function loadLaunchScreen(props, callback){
     AsyncStorage.getItem("firstlaunch").then((value) => {
         
         if(value !== 'false'){
-            storeData("firstlaunch", 'false')
             callback()
             props.navigation.navigate("LaunchApp")
         }

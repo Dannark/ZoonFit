@@ -12,6 +12,8 @@ import Activity from '../Activity'
 import Calories from '../Calories'
 import Conditional from '../Conditional'
 import LaunchApp from '../../../LaunchApp'
+import {AgeCollector, KgCollector, TallCollector, MessageScreen, GenderChooser, AcitivityFactorChooser}
+  from '../CollectInfo'
 
 import s from './styles'
 
@@ -34,12 +36,12 @@ class Home extends Component{
       <View style={s.page}>
         {this.state.renderScreen ? 
         <View style={{flex:1}}>
-        <ScrollView>
-          <HeaderSection />
-          <DaysSection />
-          <CondictionalSection navigation={this.props.navigation} />
-          <KnowledgeSection navigation={this.props.navigation} />
-        </ScrollView>
+          <ScrollView>
+            <HeaderSection navigation={this.props.navigation} />
+            <DaysSection />
+            <CondictionalSection navigation={this.props.navigation} />
+            <KnowledgeSection navigation={this.props.navigation} />
+          </ScrollView>
         </View>
         : null}
       </View>
@@ -70,8 +72,16 @@ function App() {
           <Stack.Screen name="Atividade" component={Activity} />
           <Stack.Screen name="Calorias" component={Calories} />
           <Stack.Screen name="Conditional" component={Conditional} />
+
           <Stack.Screen name="LaunchApp" component={LaunchApp}
             options={{cardStyleInterpolator: CardStyleInterpolators.forNoAnimation}} />
+          <Stack.Screen name="AgeCollector" component={AgeCollector} />
+          <Stack.Screen name="KgCollector" component={KgCollector} />
+          <Stack.Screen name="TallCollector" component={TallCollector} />
+          <Stack.Screen name="GenderChooser" component={GenderChooser} />
+          <Stack.Screen name="AcitivityFactorChooser" component={AcitivityFactorChooser} />
+          <Stack.Screen name="MessageScreen" component={MessageScreen} />
+          
         </Stack.Navigator>
       </NavigationContainer>
     </View>
