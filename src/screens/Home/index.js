@@ -8,12 +8,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators, TransitionSpecs } from '@react-navigation/stack';
 import { loadLaunchScreen } from './functions'
 
-import Activity from '../Activity'
-import Calories from '../Calories'
-import Conditional from '../Conditional'
-import LaunchApp from '../../../LaunchApp'
 import {AgeCollector, KgCollector, TallCollector, MessageScreen, GenderChooser, AcitivityFactorChooser}
   from '../CollectInfo'
+import Conditional from '../Conditional'
+import LaunchApp from '../../../LaunchApp'
+import Food from '../Food'
+import Calories from '../Calories'
+import Activity from '../Activity'
 
 import s from './styles'
 
@@ -71,6 +72,7 @@ function App() {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Atividade" component={Activity} />
           <Stack.Screen name="Calorias" component={Calories} />
+          <Stack.Screen name="Comida" component={Food} />
           <Stack.Screen name="Conditional" component={Conditional} />
 
           <Stack.Screen name="LaunchApp" component={LaunchApp}

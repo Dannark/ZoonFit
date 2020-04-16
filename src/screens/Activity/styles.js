@@ -31,7 +31,7 @@ export default StyleSheet.create({
       alignItems: 'center',
     },
     statusNameContainer:{
-      width: 60,
+      width: 80,
       alignItems: 'center'
     },
     textStatusName:{
@@ -50,6 +50,10 @@ export default StyleSheet.create({
       fontWeight:'bold',
       fontSize: 20
     },
+    mini:{
+      fontSize: 13,
+      color:"rgba(255,255,255,0.6)"
+    }
 
 
   })

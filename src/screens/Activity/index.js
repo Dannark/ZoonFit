@@ -30,35 +30,25 @@ export default props =>{
 
         <View style={s.statusContainer}>
           <View style={s.statusNameContainer}>
-            <Text style={s.textStatusName}>Sáude</Text>
+            <Text style={s.textStatusName}>Consumido</Text>
           </View>
           <View style={s.statusDisplay}>
             <GradientRect alpha1="1" alpha2="0" />
-            <Text style={s.textStatusPercentage}>71%</Text>
+            <Text style={s.textStatusPercentage}>1.125 <Text style={s.mini}>kcal</Text></Text>
           </View>
         </View>
 
         <View style={s.statusContainer}>
           <View style={s.statusNameContainer}>
-            <Text style={s.textStatusName}>Calorias</Text>
+            <Text style={s.textStatusName}>Adquirido</Text>
           </View>
           <View style={s.statusDisplay}>
             <GradientRect alpha1="1" alpha2="0" color1={Config.secondaryColor.color} 
               color2={Config.secondaryColor.color} />
-            <Text style={s.textStatusPercentage}>9.733</Text>
+            <Text style={s.textStatusPercentage}>1.733 <Text style={s.mini}>kcal</Text></Text>
           </View>
         </View>
 
-        <View style={s.statusContainer}>
-          <View style={s.statusNameContainer}>
-            <Text style={s.textStatusName}>Peso</Text>
-          </View>
-          <View style={s.statusDisplay}>
-            <GradientRect alpha1="1" alpha2="0" color1={Config.secondaryColor.color}
-              color2={Config.secondaryColor.color} />
-            <Text style={s.textStatusPercentage}>0.6k</Text>
-          </View>
-        </View>
       </ScrollView>
     </View>
   )
