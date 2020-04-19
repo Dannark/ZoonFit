@@ -35,7 +35,7 @@ export default props => {
     )
 }
 
-const FoodIcon = (props) =>{
+export const FoodIcon = (props) =>{
     const count = props.count? props.count: 1
 
     const path = '../../../img/icons/'
@@ -85,7 +85,8 @@ const FoodIcon = (props) =>{
     return(
         <View style={s.circle}>
             <Image source={iconSource} style={s.iconCircle} />
-            <Text style={s.amomunt}>x{count}</Text>
+            {count > 0? <Text style={s.amomunt}>x{count}</Text> : null }
+            
         </View>
     )
 }

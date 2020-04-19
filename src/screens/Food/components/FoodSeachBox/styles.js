@@ -55,5 +55,20 @@ export default StyleSheet.create({
     },
     selectedItemText:{
         color: 'white',
+    },
+
+    itemContainer:{
+        flexDirection: 'row',
+        paddingHorizontal: 15,
+        paddingVertical: 5,
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    itemContainerLeft:{
+        flexDirection: 'row',
+    },
+    itemKcal:{
+        color: 'gray',
+        fontSize: 13
     }
 })

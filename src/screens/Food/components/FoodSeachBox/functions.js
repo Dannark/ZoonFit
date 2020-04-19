@@ -6,19 +6,26 @@ export function onChangeText(text, options, setOptions, setInputValue){
 }
 
 export function pushToArray(obj, selectedOptions, setSelectedOptions, setInputValue, options, setOptions, setModalVisible){
-    let newList = [... selectedOptions]
-    newList.push(obj)
-    console.log(newList)
-    setSelectedOptions(newList)
+
+    if(obj!=undefined){
+        let newList = [... selectedOptions]
+        newList.push(obj)
+        setSelectedOptions(newList)
+    }
 
     setInputValue("")
     
     setOptions(options)
-    setModalVisible(true);
+    setModalVisible(false)
+}
+
+export function openModal(obj, setSelectedItem, setModalVisible){
+    setSelectedItem(obj)
+    setModalVisible(true)
 }
 
 function getSearchList(list, typed){
-    return list.filter(item => item.startsWith(typed));
+    return list.filter(item => item.foodName.toLowerCase().startsWith(typed.toLowerCase()));
 }
 
 export function deleteItem(index, selectedOptions, setSelectedOptions){

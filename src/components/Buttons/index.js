@@ -51,7 +51,8 @@ export default props => {
 
 export const BackButton = props => {
   acao = () => {
-    props.navigation.navigate("Home")
+    const target = props.target? props.target : "Home"
+    props.navigation.navigate(target)
     //BackHandler.exitApp()
   }
   return(
