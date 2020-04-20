@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import {View, Text, TextInput, TouchableHighlight, ScrollView, Modal} from 'react-native'
 import Feather from 'react-native-vector-icons/Feather';
+import { useSelector, useDispatch } from 'react-redux'
+import moment from 'moment';
 
 import AmountFoodPopupModal from './components/AmountFoodPopupModal'
 import {onChangeText, pushToArray, deleteItem, openModal} from './functions'
@@ -8,12 +10,30 @@ import s from './styles'
 import {FoodIcon} from '../../../../components/Buttons/Components/ButtonList';
 
 export default props =>{
-    const [options, setOptions] = useState(props.options)
+    const originalFoodOptions = useSelector(state => state.data)
+    const dispatch = useDispatch()
+    
+    const [options, setOptions] = useState(originalFoodOptions)
     const [selectedOptions, setSelectedOptions] = useState([])
     const [inputValue, setInputValue] = useState("")
 
     const [selectedItem, setSelectedItem] = useState("-")
     const [modalVisible, setModalVisible] = useState(false)
+
+    function addFood(){
+        
+        if(selectedOptions){
+            var hour = moment().format('hh:mm');
+            console.log("hours="+hour+"/"+props.mealType)
+            const food = {
+                name: props.mealType,
+                time: hour,
+                foods: [...selectedOptions]
+            }
+            dispatch({type: 'ADD_FOOD', food})
+            props.navigation.navigate("Calorias")
+        }
+    }
 
     return (
         <>  
@@ -32,11 +52,11 @@ export default props =>{
                     })
                 }
             </View>
-            <View style={s.container}>
+            <View style={s.contsainer}>
                 <TextInput 
                     value={inputValue}
                     style={s.inputText}
-                    onChangeText={text => onChangeText(text, props.options, setOptions, setInputValue)}
+                    onChangeText={text => onChangeText(text, originalFoodOptions, setOptions, setInputValue)}
                     placeholder={props.placeholder}
                     placeholderTextColor="rgba(255,255,255,0.1)"
                     autoFocus = {true}
@@ -72,8 +92,11 @@ export default props =>{
             <AmountFoodPopupModal modalVisible={modalVisible} selectedItem={selectedItem} 
                 close={(results) => 
                     pushToArray(results, selectedOptions, setSelectedOptions, 
-                        setInputValue, props.options, setOptions, setModalVisible)} />
+                        setInputValue, originalFoodOptions, setOptions, setModalVisible)} />
 
+            <TouchableHighlight onPress={addFood} style={s.done}>
+                <Feather name="check" size={20} color="white" style={s.search} />
+            </TouchableHighlight>
         </>
     )
 }

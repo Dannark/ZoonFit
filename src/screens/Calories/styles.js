@@ -51,12 +51,12 @@ export default StyleSheet.create({
       },
       barContainer:{
         backgroundColor: 'rgba(255,255,255,0.1)',
-        height: 4,
+        height: 3,
         borderRadius: 4
       },
       bar:{
         backgroundColor: Config.primaryColor.color,
         height: '100%',
-        borderRadius: 3
+        borderRadius: 2
       }
 })

@@ -1,21 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {View, Text, TextInput, StyleSheet} from 'react-native'
 import {Picker} from '@react-native-community/picker';
 
 export default props =>{
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const mealType = props.mealType;
+    const setMealType = props.setMealType;
     
+    const options = ["Refeição", "Lanche", "Café da manhã", "Almoço", "Janta"];
+
     return (
         <>  
             <View style={s.container}>
                 <Picker
-                    selectedValue={props.options[selectedIndex]}
+                    selectedValue={mealType}
                     style={s.item}
                     onValueChange={(itemValue, itemIndex) =>
-                        setSelectedIndex(itemIndex)
+                        setMealType(itemValue)
                     }>
                     {
-                    props.options.map((item, index) => {
+                    options.map((item, index) => {
                         return <Picker.Item key={index} label={item} value={item} />
                     })
                     }
@@ -23,10 +26,6 @@ export default props =>{
             </View>
         </>
     )
-}
-
-function onChangeText(text){
-    
 }
 
 const s = StyleSheet.create({

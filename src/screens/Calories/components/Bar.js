@@ -1,11 +1,14 @@
 import React from 'react'
 import {View, Text} from 'react-native'
 import {getTotalKcal, formatNumber} from '../functions'
+import { useSelector } from 'react-redux'
 
 import s from '../styles'
 
 export default function bar(){
-    const current = getTotalKcal()
+    const data = useSelector(state => state.caloriesFood)
+
+    const current = getTotalKcal(data)
     const total = 2057
     const progress = (current / total) * 100
     return(

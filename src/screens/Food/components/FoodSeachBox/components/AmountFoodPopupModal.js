@@ -80,9 +80,14 @@ export default props =>{
 
                     <TouchableHighlight style={s.addButton}
                         onPress={() => {
-                            food.count = getTotal(unit, kcal)[0]
-                            food.kcal = getTotal(unit, kcal)[1]
-                            props.close(food); //, getTotal(unit, kcal)[1]
+                            var newFood = {
+                                foodName: food.foodName, 
+                                icon: food.icon,
+                                count: getTotal(unit, kcal)[0], 
+                                kcal: getTotal(unit, kcal)[1]
+                            }
+                            
+                            props.close(newFood); //, getTotal(unit, kcal)[1]
                         }}>
                         <Text style={s.text}>Adicionar</Text>
                     </TouchableHighlight>

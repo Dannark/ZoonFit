@@ -16,7 +16,7 @@ export default props => {
                 <View style={s.itemsContainer}>
                     {
                         foods.map((obj, i) => {
-                            totalKcal += obj.kcal
+                            totalKcal += (obj.kcal * obj.count)
                             return (
                                 <FoodIcon key={i} icon={obj.icon} count={obj.count} />
                             )

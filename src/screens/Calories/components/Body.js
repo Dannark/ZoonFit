@@ -2,10 +2,11 @@ import React from 'react'
 import {ScrollView} from 'react-native'
 import {getData} from '../functions'
 import ButtonList from '../../../components/Buttons/Components/ButtonList'
+import { useSelector } from 'react-redux'
 
-export default function body(props){
+export default props =>{
     
-    const data = getData()
+    const data = useSelector(state => state.caloriesFood)
     
     return(
         <ScrollView>

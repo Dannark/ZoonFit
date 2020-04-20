@@ -70,5 +70,18 @@ export default StyleSheet.create({
     itemKcal:{
         color: 'gray',
         fontSize: 13
+    },
+
+    done:{
+        position: 'absolute',
+        right: 20,
+        bottom: 20,
+        zIndex: 5,
+        backgroundColor: Config.primaryColor.color,
+        borderRadius: 50,
+        width: 50,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })

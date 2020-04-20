@@ -5,7 +5,8 @@ export function onChangeText(text, options, setOptions, setInputValue){
     setOptions(newList)
 }
 
-export function pushToArray(obj, selectedOptions, setSelectedOptions, setInputValue, options, setOptions, setModalVisible){
+export function pushToArray(obj, selectedOptions, setSelectedOptions, setInputValue, options, 
+    setOptions, setModalVisible){
 
     if(obj!=undefined){
         let newList = [... selectedOptions]
