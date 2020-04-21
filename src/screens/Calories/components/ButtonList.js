@@ -1,11 +1,10 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 
-
 export default props => {
 
     const foods = props.foods ? props.foods : [{foodName:"Comida", kcal:250, icon:"food", count:1}]
-    const name = props.name ? props.name : foods[0].foodName
+    const name = props.foods.length == 1 ? foods[0].foodName : props.name
     const time = props.time ? props.time : "08:00"
     let totalKcal = 0
 
@@ -16,7 +15,8 @@ export default props => {
                 <View style={s.itemsContainer}>
                     {
                         foods.map((obj, i) => {
-                            totalKcal += (obj.kcal * obj.count)
+                            const factor = obj.grams / 100
+                            totalKcal += parseInt(obj.count * (obj.kcal * factor))
                             return (
                                 <FoodIcon key={i} icon={obj.icon} count={obj.count} />
                             )

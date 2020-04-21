@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {View, Text, TextInput, TouchableHighlight, ScrollView, Modal} from 'react-native'
+import {View, Text, TextInput, TouchableHighlight, FlatList} from 'react-native'
 import Feather from 'react-native-vector-icons/Feather';
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment';
@@ -7,7 +7,7 @@ import moment from 'moment';
 import AmountFoodPopupModal from './components/AmountFoodPopupModal'
 import {onChangeText, pushToArray, deleteItem, openModal} from './functions'
 import s from './styles'
-import {FoodIcon} from '../../../../components/Buttons/Components/ButtonList';
+import {FoodIcon} from '../../../Calories/components/ButtonList';
 
 export default props =>{
     const originalFoodOptions = useSelector(state => state.data)
@@ -22,9 +22,8 @@ export default props =>{
 
     function addFood(){
         
-        if(selectedOptions){
+        if(selectedOptions.length > 0){
             var hour = moment().format('hh:mm');
-            console.log("hours="+hour+"/"+props.mealType)
             const food = {
                 name: props.mealType,
                 time: hour,
@@ -69,25 +68,24 @@ export default props =>{
                 <Feather name="search" size={19} color="gray" style={s.search} />
             </View>
             
-            <ScrollView >
-            {
-                options.map((obj, i) => {
-                    return(
-                        <TouchableHighlight key={i}
-                            onPress={() => 
-                                openModal(obj, setSelectedItem, setModalVisible)}>
-                            <View style={s.itemContainer}>
-                                <View style={s.itemContainerLeft}>
-                                    <FoodIcon icon={obj.icon} count={-1} />
-                                    <Text style={s.item}>{obj.foodName}</Text>
-                                </View>
-                                <Text style={s.itemKcal}>{obj.kcal} kcal</Text>
+            <FlatList 
+                data={options}
+                renderItem={({item, index}) =>
+                    <TouchableHighlight
+                        onPress={() => 
+                            openModal(item, setSelectedItem, setModalVisible)}>
+                        <View style={s.itemContainer}>
+                            <View style={s.itemContainerLeft}>
+                                <FoodIcon icon={item.icon} count={-1} />
+                                <Text style={s.item}>{item.foodName}</Text>
                             </View>
-                        </TouchableHighlight>
-                    )
-                })
-            }
-            </ScrollView>
+                            <Text style={s.itemKcal}>{item.kcal} kcal</Text>
+                        </View>
+                    </TouchableHighlight>
+                }
+                keyExtractor={(item, index) => ""+index}
+                >
+            </FlatList>
             
             <AmountFoodPopupModal modalVisible={modalVisible} selectedItem={selectedItem} 
                 close={(results) => 

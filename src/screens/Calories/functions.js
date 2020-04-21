@@ -3,7 +3,8 @@ export function getTotalKcal(data){
     let kcalTotal = 0
     data.map((obj,i) => {
         obj.foods.map((food, _) => {
-            kcalTotal += food.kcal
+            const factor = food.grams / 100
+            kcalTotal += parseInt(food.count * (food.kcal * factor))
         })
         
     })

@@ -38,6 +38,7 @@ const s = StyleSheet.create({
     justifyContent: 'center',
     right: 30,
     bottom: 30,
+    elevation: 8,
   },
 
   FloatingButtonStyle: {

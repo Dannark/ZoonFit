@@ -1,21 +1,54 @@
 import { createStore } from 'redux'
 
 const INITIAL_STATE = {
-    data: [
-        {foodName:"Maça", icon:"apple", kcal:50},
-        {foodName:"Biscoito", icon:"cookie", kcal:50},
-        {foodName:"Ovo", icon:"egg", kcal:50},
-        {foodName:"Banana", icon:"banana", kcal:50},
-        {foodName:"Uva", icon:"grapes", kcal:50},
-        {foodName:"Arroz", icon:"rice", kcal:250},
-        {foodName:"Feijão", icon:"beans", kcal:250},
-        {foodName:"Salada", icon:"salad", kcal:50},
-        {foodName:"Cenoura", icon:"carrot", kcal:50},
-        {foodName:"Refrigerante", icon:"soda", kcal:250},
-        {foodName:"Sanduiche da tarde", icon:"sandwich", kcal:250}
+    //TABELA DE CALORIAS BASEADO EM 100g
+    data: [ 
+        {foodName:"Maça", icon:"apple", kcal:52, unit:"unit", grams:"100"},
+        {foodName:"Bacon", icon:"bacon", kcal:541, unit:"unit", grams:"100"},
+        {foodName:"Banana", icon:"banana", kcal:122, unit:"unit", grams:"100"},
+        {foodName:"Feijão", icon:"beans", kcal:75, unit:"unit", grams:"100"},
+        {foodName:"Pão Francês", icon:"bread", kcal:310, unit:"unit", grams:"50"},
+        {foodName:"Brocolis", icon:"broccoli", kcal:22, unit:"portion", grams:"100"},
+        {foodName:"Cenoura", icon:"carrot", kcal:45, unit:"unit", grams:"100"},
+        {foodName:"Ovo Cozido", icon:"egg", kcal:155, unit:"unit", grams:"70"},
+        {foodName:"Batata Frita", icon:"frenchfries", kcal:312, unit:"unit", grams:"100"},
+        {foodName:"Biscoito", icon:"cookie", kcal:500, unit:"portion", grams:"100"},
+        {foodName:"Uva", icon:"grapes", kcal:67, unit:"portion", grams:"100"},
+        {foodName:"Limão", icon:"lemon", kcal:29, unit:"unit", grams:"58"},
+        {foodName:"Abacaxi", icon:"pineapple", kcal:50, unit:"unit", grams:"100"},
+        {foodName:"Arroz", icon:"rice", kcal:130, unit:"unit", grams:"100"},
+        {foodName:"Salada Verde", icon:"salad", kcal:17, unit:"unit", grams:"100"},
+        {foodName:"Sanduiche", icon:"sandwich", kcal:233, unit:"unit", grams:"100"},
+        {foodName:"Refrigerante", icon:"soda", kcal:41, unit:"unit", grams:"100"},
+        {foodName:"Morango", icon:"strawberry", kcal:33, unit:"unit", grams:"100"},
+        {foodName:"Melancia", icon:"watermelon", kcal:30, unit:"unit", grams:"100"},
+        {foodName:"Carne", icon:"meat", kcal:143, unit:"unit", grams:"100"},
+        {foodName:"Cachorro Quente", icon:"hotdog", kcal:290, unit:"unit", grams:"100"},
+        {foodName:"linguiça calabresa", icon:"sausage", kcal:300, unit:"unit", grams:"100"},
+        {foodName:"linguiça de frango", icon:"sausage", kcal:166, unit:"unit", grams:"100"},
+        {foodName:"linguiça de peru defumada", icon:"sausage", kcal:148, unit:"unit", grams:"100"},
+        {foodName:"linguiça toscana", icon:"sausage", kcal:255, unit:"unit", grams:"100"},
+        {foodName:"Frango", icon:"chicken", kcal:239, unit:"unit", grams:"100"},
+        {foodName:"Peixe Grelhado", icon:"fish", kcal:109, unit:"unit", grams:"100"},
+        {foodName:"Pepperoni", icon:"pepperoni", kcal:494, unit:"unit", grams:"100"},
+        {foodName:"Pizza", icon:"pizza", kcal:266, unit:"unit", grams:"100"},
+        {foodName:"Chocolate", icon:"chocolate", kcal:546, unit:"unit", grams:"100"},
+        {foodName:"Pipoca", icon:"popcorn", kcal:375, unit:"unit", grams:"100"},
+        {foodName:"Café", icon:"coffee", kcal:1, unit:"unit", grams:"100"},
+        {foodName:"Café Expresso", icon:"coffee", kcal:9, unit:"unit", grams:"100"},
+        {foodName:"Macarrão", icon:"pasta", kcal:371, unit:"unit", grams:"100"},
+        {foodName:"Yoghurt", icon:"yoghurt", kcal:59, unit:"unit", grams:"100"},
+        {foodName:"Sorvete", icon:"icecream", kcal:207, unit:"unit", grams:"100"},
+        {foodName:"Picolé", icon:"popsicle", kcal:79, unit:"unit", grams:"100"},
+        {foodName:"Milkshake", icon:"milkshake", kcal:112, unit:"unit", grams:"100"},
+        {foodName:"Queijo", icon:"cheese", kcal:299, unit:"unit", grams:"100"},
+        {foodName:"Presunto", icon:"ham", kcal:145, unit:"unit", grams:"100"},
+        {foodName:"Chá", icon:"tea", kcal:1, unit:"unit", grams:"100"},
+        {foodName:"Tomate", icon:"tomato", kcal:19, unit:"unit", grams:"100"},
+        
     ],
     caloriesFood:[
-        { foods: [{foodName:"Banana", kcal:50, icon:"banana", count:3}] }
+        { foods: [{foodName:"Maça", kcal:52, icon:"apple", count:3, grams:100}] }
     ],
 }
 

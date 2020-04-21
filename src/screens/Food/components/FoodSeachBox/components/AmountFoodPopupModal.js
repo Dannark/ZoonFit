@@ -5,12 +5,19 @@ import {updateVal, getTotal} from './functions'
 
 import s from './styles'
 
+let previousObj = null
+
 export default props =>{
-
     const [unit, setUnit] = useState("x1")
-    const [kcal, setKcal] = useState("50")
+    const food = props.selectedItem
+    const [grams, setGrams] = useState("100")
 
-    const food = props.selectedItem? props.selectedItem: "Maça"
+    setTimeout(() => {
+        if(food.grams != undefined && previousObj != food){
+            previousObj = food
+            setGrams(""+food.grams)
+        }
+    }, 100)
 
     return(
         <Modal
@@ -27,7 +34,12 @@ export default props =>{
                     <Text style={s.textTitle}>Quantas {food.foodName} você ingeriu?</Text>
 
                     <View style={s.form}>
-                        <Text style={s.text}>Unidades: </Text>
+                        <Text style={s.text}>
+                            {food.unit == "unit"? "Unidades: "
+                            :food.unit == "portion"? "Porção: "
+                            : "Quantidade: "
+                            }
+                        </Text>
                         <View style={{alignItems:'center'}} onPress={() => setUnit(unit+1)}>
                             <TouchableHighlight style={s.arrowButton}
                                 onPress={() => updateVal(setUnit,unit,1, "x")}>
@@ -51,13 +63,13 @@ export default props =>{
                         <Text style={s.text}> de </Text>
                         <View style={{alignItems:'center'}}>
                             <TouchableHighlight style={s.arrowButton}
-                                onPress={() => updateVal(setKcal,kcal,10)}>
+                                onPress={() => updateVal(setGrams,grams,10)}>
                                 <AntDesign name="up" size={20} color="white"  />
                             </TouchableHighlight>
                             <TextInput 
-                                value={kcal}
+                                value={grams}
                                 style={s.inputText}
-                                onChangeText={text => onKcalChangeText(text, setKcal)}
+                                onChangeText={text => onKcalChangeText(text, setGrams)}
                                 placeholderTextColor="rgba(255,255,255,0.1)"
                                 keyboardType={'numeric'}
                                 onSubmitEditing={(event) => {
@@ -65,16 +77,16 @@ export default props =>{
                                 }}
                             />
                             <TouchableHighlight style={s.arrowButton}
-                                onPress={() => updateVal(setKcal,kcal,-10)}>
+                                onPress={() => updateVal(setGrams,grams,-10)}>
                                 <AntDesign name="down" size={20} color="white"  />
                             </TouchableHighlight>
                         </View>
                         
-                        <Text style={s.text}>Calorias</Text>
+                        <Text style={s.text}>Gramas</Text>
                     </View>
 
                     <Text style={s.smallText}>
-                        <Text style={s.textBigTitle}>{getTotal(unit, kcal)[2]} </Text>
+                        <Text style={s.textBigTitle}>{getTotal(unit, food.kcal, grams)[3]} </Text>
                         kcal
                     </Text>
 
@@ -83,8 +95,9 @@ export default props =>{
                             var newFood = {
                                 foodName: food.foodName, 
                                 icon: food.icon,
-                                count: getTotal(unit, kcal)[0], 
-                                kcal: getTotal(unit, kcal)[1]
+                                count: getTotal(unit, food.kcal, grams)[0],
+                                kcal: getTotal(unit, food.kcal, grams)[1],
+                                grams: getTotal(unit, food.kcal, grams)[2]
                             }
                             
                             props.close(newFood); //, getTotal(unit, kcal)[1]
@@ -108,7 +121,7 @@ function onUnitChangeText(text, setUnit){
     if(newVal.indexOf('x') == -1){
         newVal = "x"+newVal
     }
-    console.log(newVal.indexOf('x'))
+    
     setUnit(newVal)
 }
 

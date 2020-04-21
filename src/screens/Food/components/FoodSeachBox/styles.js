@@ -74,8 +74,9 @@ export default StyleSheet.create({
 
     done:{
         position: 'absolute',
-        right: 20,
-        bottom: 20,
+        right: 30,
+        bottom: 30,
+        elevation: 8,
         zIndex: 5,
         backgroundColor: Config.primaryColor.color,
         borderRadius: 50,
