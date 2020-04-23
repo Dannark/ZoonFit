@@ -45,10 +45,11 @@ const INITIAL_STATE = {
         {foodName:"Presunto", icon:"ham", kcal:145, unit:"unit", grams:"100"},
         {foodName:"Chá", icon:"tea", kcal:1, unit:"unit", grams:"100"},
         {foodName:"Tomate", icon:"tomato", kcal:19, unit:"unit", grams:"100"},
+        {foodName:"Suco de laranja", icon:"orangejuice", kcal:45, unit:"orangejuice", grams:"100"},
         
     ],
     caloriesFood:[
-        { foods: [{foodName:"Maça", kcal:52, icon:"apple", count:3, grams:100}] }
+        { key: "0", foods: [{foodName:"Maça", kcal:52, icon:"apple", count:3, grams:100}] }
     ],
 }
 
@@ -56,6 +57,12 @@ function foodsReducer(state = INITIAL_STATE, action){
     switch(action.type){
         case 'ADD_FOOD':
             return { ...state, caloriesFood:[...state.caloriesFood, action.food ] }
+        case 'REMOVE_FOOD':
+            let newList = [...state.caloriesFood]
+            let prevIndex = newList.findIndex(item => item.key === action.key)
+            
+            newList.splice(prevIndex, 1)
+            return { ...state, caloriesFood:[...newList] }
         default:
             return state;
     }

@@ -25,6 +25,7 @@ export default props =>{
         if(selectedOptions.length > 0){
             var hour = moment().format('hh:mm');
             const food = {
+                key: Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1),
                 name: props.mealType,
                 time: hour,
                 foods: [...selectedOptions]
@@ -46,7 +47,6 @@ export default props =>{
                                 <FoodIcon icon={obj.icon} count={obj.count} />
                                 {/* <Text key={i} style={s.selectedItemText}>{obj.foodName}</Text> */}
                             </TouchableHighlight>
-                            
                         )
                     })
                 }
@@ -83,7 +83,7 @@ export default props =>{
                         </View>
                     </TouchableHighlight>
                 }
-                keyExtractor={(item, index) => ""+index}
+                keyExtractor={(item, index) => item.key}
                 >
             </FlatList>
             

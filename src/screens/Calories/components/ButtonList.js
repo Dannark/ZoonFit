@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import Config from '../../../Config'
 
 export default props => {
 
@@ -9,7 +10,7 @@ export default props => {
     let totalKcal = 0
 
     return(
-        <TouchableOpacity onPress={props.onPress} >
+        //<TouchableOpacity onPress={props.onPress} >
             <View style={s.container}>
                 
                 <View style={s.itemsContainer}>
@@ -31,7 +32,7 @@ export default props => {
                 </View>
                 <Text style={s.textSubtitle}>{time}</Text>
             </View>
-        </TouchableOpacity>
+        //</TouchableOpacity>
     )
 }
 
@@ -81,6 +82,7 @@ export const FoodIcon = (props) =>{
     iconSource = props.icon == "ham" ? require(path+"ham.png") : iconSource
     iconSource = props.icon == "tea" ? require(path+"tea.png") : iconSource
     iconSource = props.icon == "tomato" ? require(path+"tomato.png") : iconSource
+    iconSource = props.icon == "orangejuice" ? require(path+"orangejuice.png") : iconSource
 
     return(
         <View style={s.circle}>
@@ -95,9 +97,9 @@ const s = StyleSheet.create({
     container:{
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 5,
         paddingHorizontal: 15,
-        marginVertical: 4
+        paddingVertical: 9,
+        backgroundColor: Config.bacgroundPrimaryColor.color
     },
     itemsContainer:{
         flexDirection: "row",
