@@ -11,6 +11,9 @@ import {FoodIcon} from '../../../Calories/components/ButtonList';
 
 export default props =>{
     const originalFoodOptions = useSelector(state => state.data)
+    const selectedDay = useSelector(state => 
+        state.daysWorked[state.selectedDayIndex] != undefined ?
+                state.daysWorked[state.selectedDayIndex] : [] )
     const dispatch = useDispatch()
     
     const [options, setOptions] = useState(originalFoodOptions)
@@ -24,13 +27,26 @@ export default props =>{
         
         if(selectedOptions.length > 0){
             var hour = moment().format('hh:mm');
+            
             const food = {
                 key: Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1),
                 name: props.mealType,
                 time: hour,
                 foods: [...selectedOptions]
             }
-            dispatch({type: 'ADD_FOOD', food})
+
+            let newCaloriesFood = []
+            if(selectedDay.caloriesFood != undefined){
+                newCaloriesFood = [...selectedDay.caloriesFood]
+            }
+            console.log("newCaloriesFood:"+newCaloriesFood)
+            const newDay = {
+                ...selectedDay, 
+                caloriesFood: [ ...newCaloriesFood, {...food}]//...food
+            }
+            console.log("newDay:"+newDay)
+            
+            dispatch({type: 'ADD_OR_REPLACE_DAY', newDay})
             props.navigation.navigate("Calorias")
         }
     }

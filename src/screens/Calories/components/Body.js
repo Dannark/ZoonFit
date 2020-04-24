@@ -12,7 +12,10 @@ const rowTranslateAnimatedValues = {};
 
 export default props =>{
     
-    const data = useSelector(state => state.caloriesFood)
+    const data = useSelector(state => 
+        state.daysWorked[state.selectedDayIndex] != undefined &&
+            state.daysWorked[state.selectedDayIndex].caloriesFood != undefined?
+                state.daysWorked[state.selectedDayIndex].caloriesFood : [] )
     const dispatch = useDispatch()
     
     Array(data.length)

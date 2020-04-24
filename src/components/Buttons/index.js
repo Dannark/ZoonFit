@@ -5,40 +5,57 @@ import s from './styles'
 import Config from '../../Config'
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 function getDayButton(props){
-  if(props.buttonType=="past"){
+  const dia = props.day[0]
+  const mes = props.day[1]
+  const buttonType = props.day[3]
+  if(buttonType=="checked"){
     return (
-      <TouchableHighlight style={s.item_past} onPress={acao}>
+      <TouchableHighlight style={s.item_past} onPress={props.onPress}>
         <View style={{alignItems:'center'}}>
             <View style={{flexDirection:"row"}}>
-              <Text style={s.mes}> {props.dia} </Text>
-              <Text style={s.mes}> {props.mes} </Text>
+              <Text style={s.mes}> {dia} </Text>
+              <Text style={s.mes}> {mes} </Text>
             </View>
             <Feather name="check" size={19} color={Config.primaryColor.color}  />
         </View>
       </TouchableHighlight>)
   }
-  else if(props.buttonType=="today"){
+  if(buttonType=="not-checked"){
     return (
-      <TouchableHighlight style={s.item_today} onPress={acao}>
+      <TouchableHighlight style={s.item_past} onPress={props.onPress}>
+        <View style={{alignItems:'center'}}>
+            <View style={{flexDirection:"row"}}>
+              <Text style={s.mes}> {dia} </Text>
+              <Text style={s.mes}> {mes} </Text>
+            </View>
+            <Text style={{color: Config.bacgroundPrimaryColor.color}}>-</Text>
+        </View>
+      </TouchableHighlight>)
+  }
+  else if(buttonType=="today"){
+    return (
+      <TouchableHighlight style={s.item_today} onPress={props.onPress}>
         <View>
-            <Text style={s.dia}> {props.dia} </Text>
-            <Text style={s.mes}> {props.mes} </Text>
+            <Text style={s.dia}> {dia} </Text>
+            <Text style={s.mes}> Hoje </Text>
         </View>
       </TouchableHighlight>)
   }else{
     return (
       <TouchableHighlight style={s.item_future} >
         <View>
-            <Text style={s.dia}> {props.dia} </Text>
-            <Text style={s.mes}> {props.mes} </Text>
+            <Text style={s.dia}> {dia} </Text>
+            <Text style={s.mes}> {mes} </Text>
         </View>
       </TouchableHighlight>
       )
   }
 }
+
 
 export default props => {
     acao = () => {

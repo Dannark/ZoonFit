@@ -1,22 +1,58 @@
-import React from 'react'
-import {View, ScrollView} from 'react-native'
+import React, { useEffect} from 'react'
+import {View, FlatList} from 'react-native'
 import Buttons from '../../../../components/Buttons'
+import { getDays, getSelectedDay, now } from './functions'
+import { useSelector, useDispatch } from 'react-redux'
+
 import s from './styles'
 
+let flatListRef = null
+
 export default porps =>{
+    const dispatch = useDispatch()
+    const showNextDays = 7
+    const days = getDays(showNextDays)
+
+    useEffect(() => {
+
+        setTimeout(() =>{
+            let target = (days.length - showNextDays - 2) 
+            if(target <0) target = 0
+
+            scrollToIndex(target)
+        }, 200)
+    })
+
+
+    function selectDay(item){
+        const newDay = {
+            day:`${item[0]}`, 
+            month:`${item[1]}`, 
+            year:`${item[2]}`,
+        }
+        dispatch({type: 'ADD_OR_REPLACE_DAY', newDay})
+    }
+
     return(
         <View style={s.dates}>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                <Buttons dia={"12"} mes={"Fev"} buttonType={"past"}></Buttons>
-                <Buttons dia={"13"} mes={"Fev"} buttonType={"past"}></Buttons>
-                <Buttons dia={"Hoje"} mes={"Fev"} buttonType={"today"}></Buttons>
-                <Buttons dia={"15"} mes={"Fev"} buttonType={""}></Buttons>
-                <Buttons dia={"16"} mes={"Fev"} buttonType={""}></Buttons>
-                <Buttons dia={"17"} mes={"Fev"} buttonType={""}></Buttons>
-                <Buttons dia={"18"} mes={"Fev"} buttonType={""}></Buttons>
-                <Buttons dia={"19"} mes={"Fev"} buttonType={""}></Buttons>
-                <Buttons dia={"20"} mes={"Fev"} buttonType={""}></Buttons>
-            </ScrollView>
+            <FlatList 
+                ref={(ref) => { flatListRef = ref; }}
+                onScrollToIndexFailed={()=>{}}
+                horizontal={true} 
+                showsHorizontalScrollIndicator={false} 
+                data={days}
+                keyExtractor={(item, i) => ""+i}
+                renderItem={({ item }) => <Buttons day={item} onPress={() => selectDay(item)} />}
+                >
+                
+            </FlatList>
         </View>
     )
 }
+
+const scrollToIndex = (index) => {
+    if(flatListRef != null){
+        flatListRef.scrollToIndex({animated: true, index: index});
+    }
+}
+

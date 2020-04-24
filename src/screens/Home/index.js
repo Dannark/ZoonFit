@@ -7,6 +7,8 @@ import KnowledgeSection from './Sections/KnowledgeSection'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators, TransitionSpecs } from '@react-navigation/stack';
 import { loadLaunchScreen } from './functions'
+import { Provider } from 'react-redux'
+import store from '../../store'
 
 import {AgeCollector, KgCollector, TallCollector, MessageScreen, GenderChooser, AcitivityFactorChooser}
   from '../CollectInfo'
@@ -34,18 +36,20 @@ class Home extends Component{
 
   render(){
     return(
-      <View style={s.page}>
-        {this.state.renderScreen ? 
-        <View style={{flex:1}}>
-          <ScrollView>
-            <HeaderSection navigation={this.props.navigation} />
-            <DaysSection />
-            <CondictionalSection navigation={this.props.navigation} />
-            <KnowledgeSection navigation={this.props.navigation} />
-          </ScrollView>
+      <Provider store={store}>
+        <View style={s.page}>
+          {this.state.renderScreen ? 
+          <View style={{flex:1}}>
+            <ScrollView>
+              <HeaderSection navigation={this.props.navigation} />
+              <DaysSection />
+              <CondictionalSection navigation={this.props.navigation} />
+              <KnowledgeSection navigation={this.props.navigation} />
+            </ScrollView>
+          </View>
+          : null}
         </View>
-        : null}
-      </View>
+      </Provider>
     )
   }
 }
