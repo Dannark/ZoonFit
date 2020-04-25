@@ -6,7 +6,10 @@ import { useSelector } from 'react-redux'
 import s from '../styles'
 
 export default function bar(){
-    const data = useSelector(state => state.caloriesFood)
+    const data = useSelector(state => 
+        state.daysWorked[state.selectedDayIndex] != undefined &&
+            state.daysWorked[state.selectedDayIndex].caloriesFood != undefined?
+                state.daysWorked[state.selectedDayIndex].caloriesFood : [] )
 
     const current = getTotalKcal(data)
     const total = 2057

@@ -1,21 +1,29 @@
 import React from 'react'
 import {View, Text, FlatList, StyleSheet, Dimensions, Animated} from 'react-native'
-import {getData} from '../functions'
 import ButtonList from './ButtonList'
 import { useSelector, useDispatch } from 'react-redux'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import Config from '../../../Config'
+import moment from 'moment'
 
 const rowTranslateAnimatedValues = {};
 
 
 export default props =>{
-    
+    const selectedDay = useSelector(state => 
+        state.daysWorked[state.selectedDayIndex] != undefined ?
+                state.daysWorked[state.selectedDayIndex] : [] );
+
     const data = useSelector(state => 
         state.daysWorked[state.selectedDayIndex] != undefined &&
             state.daysWorked[state.selectedDayIndex].caloriesFood != undefined?
-                state.daysWorked[state.selectedDayIndex].caloriesFood : [] )
+                state.daysWorked[state.selectedDayIndex].caloriesFood : [] );
+
+    const isTodaySelected = (
+        `${selectedDay.day}${selectedDay.month}${selectedDay.year}` == (moment().format("DDMMMYYYY"))
+    )
+
     const dispatch = useDispatch()
     
     Array(data.length)
@@ -33,7 +41,18 @@ export default props =>{
                 toValue: 0,
                 duration: 200,
             }).start(() => {
-                dispatch({type: 'REMOVE_FOOD', key})
+
+                //REMOVE ITEM
+                let newList = [...data]
+                let prevIndex = data.findIndex(item => item.key === key)
+                newList.splice(prevIndex, 1)
+
+                const newDay = {
+                    ...selectedDay, 
+                    caloriesFood: [ ...newList]
+                }
+
+                dispatch({type: 'ADD_OR_REPLACE_DAY', newDay})
             });
             
             
@@ -65,6 +84,7 @@ export default props =>{
             }
             keyExtractor={(item, index) => item.key}
             disableLeftSwipe
+            disableRightSwipe={!isTodaySelected}
             leftOpenValue={Dimensions.get('window').width}
             onSwipeValueChange={onSwipeValueChange}
             renderHiddenItem={ (item, index) => (

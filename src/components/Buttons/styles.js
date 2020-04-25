@@ -10,18 +10,6 @@ export default StyleSheet.create({
         marginHorizontal: 5,
         backgroundColor: '#373b42'
       },
-      item_today:{
-        width:60,
-        height:60,
-        borderRadius:15,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginHorizontal: 5,
-
-        borderColor: '#f35b1a',
-        borderWidth: 1,
-        
-      },
       item_future:{
         width:60,
         height:60,
@@ -31,6 +19,11 @@ export default StyleSheet.create({
         marginHorizontal: 5,
 
         borderColor: '#373b42',
+        borderWidth: 1,
+        
+      },
+      item_selected:{
+        borderColor: '#f35b1a',
         borderWidth: 1,
         
       },

@@ -17,7 +17,7 @@ export default props => {
 
             <Provider store={store}>
                 <Header navigation={props.navigation} />
-                {/* <Bar /> */}
+                <Bar />
                 <Body props={props} />
                 <ButtonPlus onPress={() => nextPage(props)} />
             </Provider>

@@ -1,26 +1,33 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Config from '../../Config'
+import { useSelector } from 'react-redux'
+import moment from 'moment'
 
-export default class ButtonPlus extends Component {
-  clickHandler = () => {
-    this.props.onPress()
-  };
+export default props => {
+  
+  const selectedDay = useSelector(state => 
+    state.daysWorked[state.selectedDayIndex] != undefined ?
+            state.daysWorked[state.selectedDayIndex] : [] )
 
-  render() {
-    return (
-      <View style={s.MainContainer}>
+  const isTodaySelected = (
+    `${selectedDay.day}${selectedDay.month}${selectedDay.year}` == (moment().format("DDMMMYYYY"))
+  )
+
+  return (
+    <View style={s.MainContainer}>
+      {isTodaySelected ?
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={this.clickHandler}
+          onPress={props.onPress}
           style={s.TouchableOpacityStyle}>
             <AntDesign name="pluscircle" size={50} color="white"//{Config.primaryColor.color} 
           />
         </TouchableOpacity>
-      </View>
-    );
-  }
+        : null
+      }
+    </View>
+  )
 }
 
 const s = StyleSheet.create({

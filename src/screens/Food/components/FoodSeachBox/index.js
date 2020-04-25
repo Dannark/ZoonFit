@@ -39,12 +39,11 @@ export default props =>{
             if(selectedDay.caloriesFood != undefined){
                 newCaloriesFood = [...selectedDay.caloriesFood]
             }
-            console.log("newCaloriesFood:"+newCaloriesFood)
+            
             const newDay = {
                 ...selectedDay, 
                 caloriesFood: [ ...newCaloriesFood, {...food}]//...food
             }
-            console.log("newDay:"+newDay)
             
             dispatch({type: 'ADD_OR_REPLACE_DAY', newDay})
             props.navigation.navigate("Calorias")
@@ -99,7 +98,7 @@ export default props =>{
                         </View>
                     </TouchableHighlight>
                 }
-                keyExtractor={(item, index) => item.key}
+                keyExtractor={(item, index) => ""+index}
                 >
             </FlatList>
             

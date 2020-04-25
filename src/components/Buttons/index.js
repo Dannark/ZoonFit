@@ -12,33 +12,30 @@ function getDayButton(props){
   const dia = props.day[0]
   const mes = props.day[1]
   const buttonType = props.day[3]
-  if(buttonType=="checked"){
+  const isSelected = props.day[4]? s.item_selected : null
+
+  if(buttonType=="checked" || buttonType=="not-checked"){
     return (
-      <TouchableHighlight style={s.item_past} onPress={props.onPress}>
+      <TouchableHighlight style={[s.item_past, isSelected]} onPress={props.onPress}>
         <View style={{alignItems:'center'}}>
             <View style={{flexDirection:"row"}}>
               <Text style={s.mes}> {dia} </Text>
               <Text style={s.mes}> {mes} </Text>
             </View>
-            <Feather name="check" size={19} color={Config.primaryColor.color}  />
-        </View>
-      </TouchableHighlight>)
-  }
-  if(buttonType=="not-checked"){
-    return (
-      <TouchableHighlight style={s.item_past} onPress={props.onPress}>
-        <View style={{alignItems:'center'}}>
-            <View style={{flexDirection:"row"}}>
-              <Text style={s.mes}> {dia} </Text>
-              <Text style={s.mes}> {mes} </Text>
-            </View>
-            <Text style={{color: Config.bacgroundPrimaryColor.color}}>-</Text>
+            {
+              (buttonType=="checked")?
+                <Feather name="check" size={19} color={Config.primaryColor.color}  />:
+              buttonType=="not-checked"?
+                <Text style={{color: Config.bacgroundPrimaryColor.color}}>-</Text>:
+              null
+            }
+            
         </View>
       </TouchableHighlight>)
   }
   else if(buttonType=="today"){
     return (
-      <TouchableHighlight style={s.item_today} onPress={props.onPress}>
+      <TouchableHighlight style={[s.item_future, isSelected]} onPress={props.onPress}>
         <View>
             <Text style={s.dia}> {dia} </Text>
             <Text style={s.mes}> Hoje </Text>

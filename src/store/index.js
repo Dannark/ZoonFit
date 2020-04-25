@@ -49,16 +49,11 @@ const INITIAL_STATE = {
         
     ],
     daysWorked:[
-        {day:"21", month:"Abr", year:"2020", checked:true,
+        {day:"22", month:"Apr", year:"2020", checked:true,
             caloriesFood:[
                 { key: "0", foods: [{foodName:"Maça", kcal:52, icon:"apple", count:3, grams:"100"}] }
             ]    
         },
-        {day:"22", month:"Abr", year:"2020", checked:false,
-            caloriesFood:[
-                { key: "0", foods: [{foodName:"Chá", icon:"tea", kcal:1, unit:"unit", grams:"100"}] }
-            ]    
-        }
     ],
     selectedDayIndex: 0,
 }
@@ -66,13 +61,14 @@ const INITIAL_STATE = {
 function foodsReducer(state = INITIAL_STATE, action){
     switch(action.type){
         case 'ADD_OR_REPLACE_DAY':
-            const foundIndex = state.daysWorked.findIndex(item => 
+            let foundIndex = state.daysWorked.findIndex(item => 
                 (item.day+""+item.month+""+item.year) == (action.newDay.day+""+action.newDay.month+""+action.newDay.year) )
 
             let new_DaysWorked = [...state.daysWorked]
             if(foundIndex == -1){
                 //add
                 new_DaysWorked = [...state.daysWorked, action.newDay]
+                foundIndex = state.daysWorked.length
             }
             else{
                 //update

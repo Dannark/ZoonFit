@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux'
 const moment = require("moment");
-import 'moment/locale/pt-br'
+//import 'moment/locale/pt-br'
 
 export const getDays = (showNextDays = 5) =>{
+    const selectedDay = getSelectedDay()
     const daysWorked = getWorkedDays()
 
     let range = showNextDays
@@ -17,15 +18,18 @@ export const getDays = (showNextDays = 5) =>{
 
     const myDays = Array(range).fill('').map((item,index) => {
         const dayOffset = (index - diffInDays)
-        const date = moment().locale('pt-BR').add( dayOffset, 'days')
+        const date = moment().add( dayOffset, 'days')
         const day = date.format('DD')
         const month = date.format('MMM')
         const year = date.format('YYYY')
 
-        const doesButtonExistAndIsCheckedON = isDateChecked((day+""+month+""+year), daysWorked, true) 
+        const doesButtonExistAndIsCheckedON = isDateChecked((day+""+month+""+year), daysWorked) 
         const type = doesButtonExistAndIsCheckedON ? "checked" : dayOffset == 0 ? "today" : 
             dayOffset < 0 ? "not-checked":""
-        return [day, month, year, type];
+        
+        const isSelected = selectedDay == (day+""+month+""+year)
+        
+        return [day, month, year, type, isSelected];
     })
     return myDays
 }
@@ -33,8 +37,14 @@ export const getDays = (showNextDays = 5) =>{
 const getWorkedDays = () =>{
     return useSelector(state => state.daysWorked)
 }
+const getSelectedDay = () =>{
+    const selectedDay = useSelector(state => 
+        state.daysWorked[state.selectedDayIndex] != undefined ?
+                state.daysWorked[state.selectedDayIndex] : [] )
+    return `${selectedDay.day}${selectedDay.month}${selectedDay.year}`
+}
 
-const isDateChecked = (date, arrayDate, checkedState) =>{
+const isDateChecked = (date, arrayDate) =>{
     var found = false
     arrayDate.map((item,index) => {
         if(date === (item.day+""+item.month+""+item.year) && item.checked == true){
@@ -45,4 +55,4 @@ const isDateChecked = (date, arrayDate, checkedState) =>{
     return found
 }
 
-export const now = moment().locale('pt-BR')
+export const now = [moment().format('DD'), moment().format('MMM'), moment().format('YYYY')]
