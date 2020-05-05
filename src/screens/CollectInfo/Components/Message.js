@@ -2,22 +2,32 @@ import React, { useState } from 'react'
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native'
 import Config from '../../../Config'
 import Feather from 'react-native-vector-icons/Feather';
+import { useDispatch } from 'react-redux'  
 
 export default props => {
     const [msgStage, setMsg] = useState(0)
-    const TMB = props.TMB? props.TMB: 2000
+    const user = props.user
+
+    const dispatch = useDispatch()
+
+    if(user != undefined){
+        console.log("salvando prefencias de usuario")
+        console.log(user)
+        dispatch({type: 'SET_USER', user})
+    }
+
     return(
         <>
             <View style={s.container}>
                 <View style={s.tmbContainer}>
                     <Text style={s.tmbsmall}>TMB</Text>
-                    <Text style={s.tmb}>{TMB}</Text>
+                    <Text style={s.tmb}>{user.tmb}</Text>
                 </View>
                 <Text style={s.title}>Parabéns!</Text>
                 {
                     msgStage == 0?
                         <Text style={s.text}>O seu TMB (Taxa Metabólica Basal) 
-                        é de <Text style={s.textBigger}>{TMB}</Text> kcal ou seja, o quanto o 
+                        é de <Text style={s.textBigger}>{user.tmb}</Text> kcal ou seja, o quanto o 
                         seu organismo gasta de energia para manter as atividades vitais 
                         básicas em funcionamento.</Text>
                     

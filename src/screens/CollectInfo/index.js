@@ -6,13 +6,17 @@ import ChooserScreen from './Components/Chooser'
 import Message from './Components/Message'
 
 import AsyncStorage from '@react-native-community/async-storage';
+import { Provider } from 'react-redux'  
+import { PersistGate } from 'redux-persist/integration/react';
+import {store, persistor} from '../../store'
 
 var user = {
     kg: 0,
     tall: 0,
     age: 0,
     gender: 0,
-    activity: 0
+    activity: 0,
+    tmb: 0
 }
 
 export const AgeCollector = props => {
@@ -80,12 +84,17 @@ export const MessageScreen = props => {
     }else if(user.activity == 4){
         user_tmb *= 1.9
     }
-
+    
     user_tmb = parseInt(user_tmb)
+    user.tmb = user_tmb
 
     return(
         <>
-            <Message TMB={user_tmb} callback={() => messageResponse(props)} />
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <Message user={user} callback={() => messageResponse(props) } />
+                </PersistGate>
+            </Provider>
         </>
     )
 }    

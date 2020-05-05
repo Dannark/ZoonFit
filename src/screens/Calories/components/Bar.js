@@ -7,9 +7,9 @@ import s from '../styles'
 
 export default function bar(){
     const data = useSelector(state => 
-        state.daysWorked[state.selectedDayIndex] != undefined &&
-            state.daysWorked[state.selectedDayIndex].caloriesFood != undefined?
-                state.daysWorked[state.selectedDayIndex].caloriesFood : [] )
+        state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] != undefined &&
+            state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex].caloriesFood != undefined?
+                state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex].caloriesFood : [] )
 
     const current = getTotalKcal(data)
     const total = 2057

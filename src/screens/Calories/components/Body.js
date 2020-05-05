@@ -12,13 +12,13 @@ const rowTranslateAnimatedValues = {};
 
 export default props =>{
     const selectedDay = useSelector(state => 
-        state.daysWorked[state.selectedDayIndex] != undefined ?
-                state.daysWorked[state.selectedDayIndex] : [] );
+        state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] != undefined ?
+            state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] : [] );
 
-    const data = useSelector(state => 
-        state.daysWorked[state.selectedDayIndex] != undefined &&
-            state.daysWorked[state.selectedDayIndex].caloriesFood != undefined?
-                state.daysWorked[state.selectedDayIndex].caloriesFood : [] );
+    const foodListOfTheSelectedDay = useSelector(state => 
+        state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] != undefined &&
+            state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex].caloriesFood != undefined?
+                state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex].caloriesFood : [] );
 
     const isTodaySelected = (
         `${selectedDay.day}${selectedDay.month}${selectedDay.year}` == (moment().format("DDMMMYYYY"))
@@ -26,7 +26,7 @@ export default props =>{
 
     const dispatch = useDispatch()
     
-    Array(data.length)
+    Array(foodListOfTheSelectedDay.length)
         .fill('')
         .forEach((_, i) => {
             rowTranslateAnimatedValues[`${i}`] = new Animated.Value(1);
@@ -36,22 +36,22 @@ export default props =>{
         const { key, value } = swipeData;
         
         if (value == Dimensions.get('window').width ) {
-            const prevIndex = data.findIndex(item => item.key === key);
+            const prevIndex = foodListOfTheSelectedDay.findIndex(item => item.key === key);
             Animated.timing(rowTranslateAnimatedValues[prevIndex], {
                 toValue: 0,
                 duration: 200,
             }).start(() => {
 
                 //REMOVE ITEM
-                let newList = [...data]
-                let prevIndex = data.findIndex(item => item.key === key)
+                let newList = [...foodListOfTheSelectedDay]
+                let prevIndex = foodListOfTheSelectedDay.findIndex(item => item.key === key)
                 newList.splice(prevIndex, 1)
 
                 const newDay = {
                     ...selectedDay, 
                     caloriesFood: [ ...newList]
                 }
-
+                
                 dispatch({type: 'ADD_OR_REPLACE_DAY', newDay})
             });
             
@@ -63,7 +63,7 @@ export default props =>{
         <SwipeListView 
             useFlatList={true}
             
-            data={data}
+            data={foodListOfTheSelectedDay}
             renderItem={({item, index}) => 
                 <Animated.View
                     useNativeDriver={false}

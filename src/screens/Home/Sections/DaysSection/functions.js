@@ -35,12 +35,13 @@ export const getDays = (showNextDays = 5) =>{
 }
 
 const getWorkedDays = () =>{
-    return useSelector(state => state.daysWorked)
+    return useSelector(state => state.daysWorkedReducer.daysWorked)
 }
 const getSelectedDay = () =>{
+
     const selectedDay = useSelector(state => 
-        state.daysWorked[state.selectedDayIndex] != undefined ?
-                state.daysWorked[state.selectedDayIndex] : [] )
+        state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] != undefined ?
+            state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] : [] )
     return `${selectedDay.day}${selectedDay.month}${selectedDay.year}`
 }
 

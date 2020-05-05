@@ -7,8 +7,8 @@ import moment from 'moment'
 export default props => {
   
   const selectedDay = useSelector(state => 
-    state.daysWorked[state.selectedDayIndex] != undefined ?
-            state.daysWorked[state.selectedDayIndex] : [] )
+    state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] != undefined ?
+      state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] : [] )
 
   const isTodaySelected = (
     `${selectedDay.day}${selectedDay.month}${selectedDay.year}` == (moment().format("DDMMMYYYY"))

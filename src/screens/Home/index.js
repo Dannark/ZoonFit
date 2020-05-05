@@ -8,7 +8,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators, TransitionSpecs } from '@react-navigation/stack';
 import { loadLaunchScreen } from './functions'
 import { Provider } from 'react-redux'
-import store from '../../store'
+import { PersistGate } from 'redux-persist/integration/react';
+import {store, persistor} from '../../store'
+import { authorize } from '../../services/fitService'
 
 import {AgeCollector, KgCollector, TallCollector, MessageScreen, GenderChooser, AcitivityFactorChooser}
   from '../CollectInfo'
@@ -32,23 +34,27 @@ class Home extends Component{
 
   callback = () =>{
     this.setState({renderScreen:true})
+    authorize()
   }
 
   render(){
     return(
       <Provider store={store}>
-        <View style={s.page}>
-          {this.state.renderScreen ? 
-          <View style={{flex:1}}>
-            <ScrollView>
-              <HeaderSection navigation={this.props.navigation} />
-              <DaysSection />
-              <CondictionalSection navigation={this.props.navigation} />
-              <KnowledgeSection navigation={this.props.navigation} />
-            </ScrollView>
+        <PersistGate loading={null} persistor={persistor}>
+          <View style={s.page}>
+            {this.state.renderScreen ? 
+            <View style={{flex:1}}>
+              <ScrollView
+                showsVerticalScrollIndicator={false}>
+                <HeaderSection navigation={this.props.navigation} />
+                <DaysSection />
+                <CondictionalSection navigation={this.props.navigation} />
+                <KnowledgeSection navigation={this.props.navigation} />
+              </ScrollView>
+            </View>
+            : null}
           </View>
-          : null}
-        </View>
+        </PersistGate>
       </Provider>
     )
   }

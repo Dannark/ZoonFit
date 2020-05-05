@@ -26,7 +26,7 @@ export function openModal(obj, setSelectedItem, setModalVisible){
 }
 
 function getSearchList(list, typed){
-    return list.filter(item => item.foodName.toLowerCase().startsWith(typed.toLowerCase()));
+    return list.filter(item => item.description.toLowerCase().startsWith(typed.toLowerCase()));
 }
 
 export function deleteItem(index, selectedOptions, setSelectedOptions){

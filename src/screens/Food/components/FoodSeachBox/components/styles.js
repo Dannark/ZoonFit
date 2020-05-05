@@ -11,15 +11,17 @@ export default StyleSheet.create({
     innerContainer:{
         width: '80%',
         paddingVertical: 20,
+        paddingHorizontal: 20,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: Config.bacgroundPrimaryColor.color,
-        borderRadius: 15
+        borderRadius: 15,
     },
     textTitle:{
         color: 'white',
         fontWeight:'bold',
-        fontSize: 16
+        fontSize: 17,
+        textAlign: 'center',
     },
     text:{
         color: 'white'

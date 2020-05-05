@@ -10,16 +10,17 @@ import s from './styles'
 import {FoodIcon} from '../../../Calories/components/ButtonList';
 
 export default props =>{
-    const originalFoodOptions = useSelector(state => state.data)
+    const foodDatabase = useSelector(state => state.foodsReducer.data)
     const selectedDay = useSelector(state => 
-        state.daysWorked[state.selectedDayIndex] != undefined ?
-                state.daysWorked[state.selectedDayIndex] : [] )
+        state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] != undefined ?
+                state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] : [] )
     const dispatch = useDispatch()
     
-    const [options, setOptions] = useState(originalFoodOptions)
+    //console.log(JSON.stringify(options, false, 4))
+    const [options, setOptions] = useState(foodDatabase)
     const [selectedOptions, setSelectedOptions] = useState([])
     const [inputValue, setInputValue] = useState("")
-
+    
     const [selectedItem, setSelectedItem] = useState("-")
     const [modalVisible, setModalVisible] = useState(false)
 
@@ -70,7 +71,7 @@ export default props =>{
                 <TextInput 
                     value={inputValue}
                     style={s.inputText}
-                    onChangeText={text => onChangeText(text, originalFoodOptions, setOptions, setInputValue)}
+                    onChangeText={text => onChangeText(text, foodDatabase, setOptions, setInputValue)}
                     placeholder={props.placeholder}
                     placeholderTextColor="rgba(255,255,255,0.1)"
                     autoFocus = {true}
@@ -92,9 +93,9 @@ export default props =>{
                         <View style={s.itemContainer}>
                             <View style={s.itemContainerLeft}>
                                 <FoodIcon icon={item.icon} count={-1} />
-                                <Text style={s.item}>{item.foodName}</Text>
+                                <Text style={s.item}>{item.description}</Text>
                             </View>
-                            <Text style={s.itemKcal}>{item.kcal} kcal</Text>
+                            <Text style={s.itemKcal}>{parseInt(item.attributes.energy.kcal)} kcal</Text>
                         </View>
                     </TouchableHighlight>
                 }
@@ -105,7 +106,7 @@ export default props =>{
             <AmountFoodPopupModal modalVisible={modalVisible} selectedItem={selectedItem} 
                 close={(results) => 
                     pushToArray(results, selectedOptions, setSelectedOptions, 
-                        setInputValue, originalFoodOptions, setOptions, setModalVisible)} />
+                        setInputValue, foodDatabase, setOptions, setModalVisible)} />
 
             <TouchableHighlight onPress={addFood} style={s.done}>
                 <Feather name="check" size={20} color="white" style={s.search} />
