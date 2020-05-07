@@ -2,6 +2,7 @@ const INITIAL_STATE = {
     
     daysWorked:[
         /*{day:"22", month:"Apr", year:"2020", checked:true,
+            steps:"0",
             caloriesFood:[
                 { key: "0", foods: [{foodName:"Maça", kcal:52, icon:"apple", count:3, grams:"100"}] }
             ]    

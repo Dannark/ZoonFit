@@ -1,7 +1,7 @@
 import React from 'react'
 import {Text, View, StyleSheet, TouchableHighlight, Button, ScrollView} from 'react-native'
 import {BackButton} from '../../../components/Buttons'
-import CounterSection from '../../Home/Sections/CounterSection'
+import CounterSection from './CounterSection'
 import GradientChart from '../../../components/Charts/GradientChart'
 import GradientRect from '../../../components/Buttons/Components/GradientRect'
 import { useSelector, useDispatch } from 'react-redux'
@@ -13,14 +13,17 @@ import s from '../styles'
 
 export default props =>{
   //const foodDatabase = useSelector(state => state.foodsReducer.data)
+  const selectedDay = useSelector(state => 
+    state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] != undefined ?
+      state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] : [] );
+
   const foodListOfTheSelectedDay = useSelector(state => 
     state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex] != undefined &&
       state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex].caloriesFood != undefined?
         state.daysWorkedReducer.daysWorked[state.daysWorkedReducer.selectedDayIndex].caloriesFood : [] );
 
   const totalKcal = getTotalKcal(foodListOfTheSelectedDay)
-
-  const user = useSelector(state => state.userPrefDataReducer.user);
+  const totalSteps = selectedDay.steps ? selectedDay.steps : 0
 
   // chart
   const chartHeight = 150
@@ -41,7 +44,7 @@ export default props =>{
         </View>
 
         <GradientChart height={chartHeight} data={data} data2={data2} selectedDay={dayOfWeek} />
-        <CounterSection />
+        <CounterSection steps={formatNumber(totalSteps)} />
 
         <View style={s.statusContainer}>
           <View style={s.statusNameContainer}>

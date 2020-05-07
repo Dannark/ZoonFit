@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import {View, ScrollView } from 'react-native'
 import CondictionalSection from './Sections/CondictionalSection'
 import DaysSection from './Sections/DaysSection'
@@ -7,10 +7,9 @@ import KnowledgeSection from './Sections/KnowledgeSection'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators, TransitionSpecs } from '@react-navigation/stack';
 import { loadLaunchScreen } from './functions'
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react';
-import {store, persistor} from '../../store'
-import { authorize } from '../../services/fitService'
+
+import { useDispatch } from 'react-redux'
+import { authorizeGoogleFitAPI, saveStepOnToday } from '../../services/fitService'
 
 import {AgeCollector, KgCollector, TallCollector, MessageScreen, GenderChooser, AcitivityFactorChooser}
   from '../CollectInfo'
@@ -22,42 +21,42 @@ import Activity from '../Activity'
 
 import s from './styles'
 
-class Home extends Component{
-  
-  constructor(props) {
-    super(props);
+const Home = (props) => {
+  const [renderScreen, setRenderScreen] = useState(0)
 
-    this.state = { renderScreen:false }
-    loadLaunchScreen(props, this.callback)
+  loadLaunchScreen(props, callback)
+
+  const dispatch = useDispatch()
+
+  function callback (){
+    if(renderScreen == false){
+      setRenderScreen(true)
+      authorizeGoogleFitAPI(stepCallBack) // <- Call Google Fitness API
+    }
+  }
+
+  function stepCallBack(totalStep){
+    console.log("callback steps "+totalStep)
     
+    saveStepOnToday(totalStep, dispatch)
   }
 
-  callback = () =>{
-    this.setState({renderScreen:true})
-    authorize()
-  }
 
-  render(){
-    return(
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <View style={s.page}>
-            {this.state.renderScreen ? 
-            <View style={{flex:1}}>
-              <ScrollView
-                showsVerticalScrollIndicator={false}>
-                <HeaderSection navigation={this.props.navigation} />
-                <DaysSection />
-                <CondictionalSection navigation={this.props.navigation} />
-                <KnowledgeSection navigation={this.props.navigation} />
-              </ScrollView>
-            </View>
-            : null}
-          </View>
-        </PersistGate>
-      </Provider>
-    )
-  }
+  return(
+    <View style={s.page}>
+      {renderScreen ? 
+      <View style={{flex:1}}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}>
+          <HeaderSection navigation={props.navigation} />
+          <DaysSection />
+          <CondictionalSection navigation={props.navigation} />
+          <KnowledgeSection navigation={props.navigation} />
+        </ScrollView>
+      </View>
+      : null}
+    </View>
+  )
 }
 
 

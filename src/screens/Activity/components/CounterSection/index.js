@@ -1,15 +1,17 @@
 import React from 'react'
 import {Text, View, StyleSheet, TouchableHighlight} from 'react-native'
 import s from './styles'
+import { authorizeGoogleFitAPI } from '../../../../services/fitService'
 
 export default props =>{
+    const totalSteps = props.steps
     return(
         <View style={s.container_status}>
             <TouchableHighlight onPress={() => passos("4.431 km percorridos")}
              style={s.toucharea} underlayColor='rgba(0,0,0,0.1)'>
                 <View style={s.container_status_item}>
                     <View style={{flexDirection:'row',alignItems:'flex-end'}}>
-                    <Text style={s.bigText}>12k</Text><Text style={s.midText}></Text>
+                        <Text style={s.bigText}>{totalSteps}</Text><Text style={s.midText}></Text>
                     </View>
                     <Text style={s.smallText}>Passos</Text>
                 </View>

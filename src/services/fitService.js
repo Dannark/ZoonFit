@@ -1,6 +1,7 @@
 import GoogleFit, { Scopes } from 'react-native-google-fit'
+const moment = require("moment");
 
-export function authorize() {
+export function authorizeGoogleFitAPI(stepCallBack) {
     GoogleFit.checkIsAuthorized()
     .then(() => {
         console.log("Is Logged on GoogleFit? "+GoogleFit.isAuthorized)
@@ -13,25 +14,25 @@ export function authorize() {
             }
 
             GoogleFit.authorize(options)
-            .then(authResult => {
-            if (authResult.success) {
-                //dispatch("AUTH_SUCCESS");
-                console.log("AUTH_SUCCESS")
+                .then(authResult => {
+                if (authResult.success) {
+                    //dispatch("AUTH_SUCCESS");
+                    console.log("AUTH_SUCCESS")
 
-                getStepsForPeriod()
-            } else {
-                //dispatch("AUTH_DENIED", authResult.message);
-                console.log("AUTH_DENIED")
-                console.log(authResult.message)
-            }
+                    getStepsForPeriod(stepCallBack)
+                } else {
+                    //dispatch("AUTH_DENIED", authResult.message);
+                    console.log("AUTH_DENIED")
+                    console.log(authResult.message)
+                }
             })
             .catch(() => {
-            dispatch("AUTH_ERROR");
+                //dispatch("AUTH_ERROR");
             })
         
         }
         else{
-            getStepsForPeriod()
+            getStepsForPeriod(stepCallBack)
         }
     })
     
@@ -39,16 +40,15 @@ export function authorize() {
 
 
 export function startRecording(){
-    console.log("startRecording")
     if(GoogleFit.isAuthorized){
         GoogleFit.startRecording((callback) => {
-            console.log("recoding...")
+            
         });
     }
 }
 
-export function getStepsForPeriod(){
-    console.log("getStepsForPeriod")
+export function getStepsForPeriod(stepCallBack){
+    let totalStep = 0
 
     const options = {
         startDate: "2020-01-01T00:00:17.971Z", // required ISO8601Timestamp
@@ -56,8 +56,38 @@ export function getStepsForPeriod(){
     };
     
     GoogleFit.getDailyStepCountSamples(options)
-    .then((res) => {
-        console.log('Daily steps >>> ', res)
+        .then((res) => {
+        
+        res.map((item,index) => {
+            if(item.steps.length != 0){
+                
+                item.steps.map((step, i) => {
+                    if(step.date == moment().format('YYYY-MM-DD')){
+                        console.log("Today Steps: "+step.value + " on "+step.date)
+                        totalStep += step.value
+                    }
+                })
+            }
+        })
+        stepCallBack(totalStep)
     })
     .catch((err) => {console.warn(err)})
+
+    return totalStep
 }
+
+
+export function saveStepOnToday(totalSteps, dispatch){
+    
+    if(now != undefined){
+        const newDay = {
+            day:`${now[0]}`, 
+            month:`${now[1]}`, 
+            year:`${now[2]}`,
+            steps: `${totalSteps}`
+        }
+        dispatch({type: 'ADD_OR_REPLACE_DAY', newDay})
+    }
+}
+
+const now = [moment().format('DD'), moment().format('MMM'), moment().format('YYYY')]

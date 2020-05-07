@@ -9,7 +9,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import Animated from 'react-native-reanimated';
 import s from './styles'
 import Profile from './Sections/Profile'
-import Config from '../../Config'
+
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react';
+import {store, persistor} from '../../store'
 
 import Home from '../Home'
 import Feed from '../Feed'
@@ -81,8 +84,12 @@ function MyDrawer() {
 
 export default function App() {
     return (
-      <NavigationContainer independent={true}>
-        <MyDrawer />
-      </NavigationContainer>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationContainer independent={true}>
+            <MyDrawer />
+          </NavigationContainer>
+        </PersistGate>
+      </Provider>
     );
 }
